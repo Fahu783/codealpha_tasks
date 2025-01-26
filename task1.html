@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .gallery img {
+            max-width: 500px;
+            max-height: 300px;
+            border: 5px solid #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+
+        .navigation {
+            margin-top: 20px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .navigation button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+
+        .navigation button:hover {
+            background-color: #0056b3;
+        }
+
+        .navigation button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <div class="gallery">
+        <img id="current-image" src="./354970.jpg" alt="Gallery Image">
+
+        <div class="navigation">
+            <button id="prev-button">Previous</button>
+            <button id="next-button">Next</button>
+        </div>
+    </div>
+
+    <script>
+        const images = ["./354970.jpg", "./R.jpg", "./wp4956754.jpg", "./wp4956754.jpg"];
+        let currentIndex = 0;
+
+        const currentImage = document.getElementById("current-image");
+        const prevButton = document.getElementById("prev-button");
+        const nextButton = document.getElementById("next-button");
+
+        function updateImage() {
+            currentImage.src = images[currentIndex];
+            prevButton.disabled = currentIndex === 0;
+            nextButton.disabled = currentIndex === images.length - 1;
+        }
+
+        prevButton.addEventListener("click", () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateImage();
+            }
+        });
+
+        nextButton.addEventListener("click", () => {
+            if (currentIndex < images.length - 1) {
+                currentIndex++;
+                updateImage();
+            }
+        });
+
+       
+        updateImage();
+    </script>
+</body>
+</html>
